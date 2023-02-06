@@ -50,7 +50,7 @@ class MLP(torch.nn.Module):
         """
         x = self.actv(self.input(x))
         for layer in self.linears:
-          x = layer(x)
-          x = self.actv(x)
+            x = layer(x)
+            x = self.actv(x)
         x = self.output(x)
         return x
