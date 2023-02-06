@@ -38,7 +38,7 @@ class MLP(torch.nn.Module):
 
         initializer(self.input.weight)
 
-        self.dropout = nn.Dropout(0.2)
+        self.dropout = nn.Dropout(0.5)
 
     def forward(self, x: torch.float32) -> torch.float32:
         """
