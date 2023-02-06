@@ -2,13 +2,12 @@
     "assignment_name": "MLP",
     "contributors": [
         {
-            "name": "Jordan Matelsky",
-            "pennkey": "matelsky"
+            "name": "Bhaskar Sen",
+            "pennkey": "bsen26"
         }
     ],
     "sources": [
-        "https://example.com",
-        "Conversations with TA (include TA's name)",
-        "LLM (include information about the LLM and how it was used)"
+        "ttps://medium.com/@aungkyawmyint_26195/multi-layer-perceptron-mnist-pytorch-463f795b897a",
+        "https://pytorch.org/docs/stable/generated/torch.nn.ModuleList.html"
     ]
 }

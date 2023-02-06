@@ -1,8 +1,13 @@
 import torch
+import torch.nn as nn
 from typing import Callable
 
 
-class MLP:
+class MLP(torch.nn.Module):
+    """
+    This is the Multi-Layer Perceptron class
+    """
+
     def __init__(
         self,
         input_size: int,
@@ -22,9 +27,18 @@ class MLP:
             activation: The activation function to use in the hidden layer.
             initializer: The initializer to use for the weights.
         """
-        ...
+        super(MLP, self).__init__()
 
-    def forward(self, x):
+        self.input = nn.Linear(input_size, hidden_size)
+        self.linears = nn.ModuleList(
+            [nn.Linear(hidden_size, hidden_size) for i in range(hidden_count)]
+        )
+        self.output = nn.Linear(hidden_size, num_classes)
+        self.actv = activation
+
+        initializer(self.input.weight)
+
+    def forward(self, x: torch.float32) -> torch.float32:
         """
         Forward pass of the network.
 
@@ -34,4 +48,6 @@ class MLP:
         Returns:
             The output of the network.
         """
-        ...
+        x = self.actv(self.l1(x))
+        x = self.l2(x)
+        return x
