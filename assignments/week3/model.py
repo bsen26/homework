@@ -34,7 +34,7 @@ class MLP(torch.nn.Module):
             [nn.Linear(hidden_size, hidden_size) for i in range(hidden_count)]
         )
         self.output = nn.Linear(hidden_size, num_classes)
-        self.actv = activation
+        self.actv = activation()
 
         initializer(self.input.weight)
 
