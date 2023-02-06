@@ -50,7 +50,6 @@ class MLP(torch.nn.Module):
         Returns:
             The output of the network.
         """
-        x = x.view(-1, 28 * 28)
         x = self.actv(self.input(x))
         x = self.dropout(x)
         for layer in self.linears:
