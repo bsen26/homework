@@ -38,7 +38,7 @@ class MLP(torch.nn.Module):
 
         initializer(self.input.weight)
 
-        # self.dropout = nn.Dropout(0.2)
+        self.dropout = nn.Dropout(0.5)
 
     def forward(self, x: torch.float32) -> torch.float32:
         """
@@ -51,10 +51,10 @@ class MLP(torch.nn.Module):
             The output of the network.
         """
         x = self.actv(self.input(x))
-        # x = self.dropout(x)
+        x = self.dropout(x)
         for layer in self.linears:
             x = layer(x)
             x = self.actv(x)
-            # x = self.dropout(x)
+            x = self.dropout(x)
         x = self.output(x)
         return x
