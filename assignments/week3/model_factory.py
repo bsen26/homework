@@ -15,6 +15,4 @@ def create_model(input_dim: int, output_dim: int) -> MLP:
         MLP: The created model.
 
     """
-    return MLP(
-        input_dim, 512, output_dim, 2, torch.nn.LeakyReLU(0.1), torch.nn.init.zeros_
-    )
+    return MLP(input_dim, 512, output_dim, 2, torch.nn.ReLU, torch.nn.init.zeros_)
