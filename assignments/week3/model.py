@@ -59,4 +59,4 @@ class MLP(torch.nn.Module):
             x = self.dropout(x)
         x = self.output(x)
         # return torch.nn.functional.log_softmax(x, dim=1)
-        return x
+        return torch.nn.functional.softmax(x, dim=1)
