@@ -36,7 +36,12 @@ class MLP(torch.nn.Module):
         self.output = nn.Linear(hidden_size, num_classes)
         self.actv = activation()
 
-        initializer(self.input.weight)
+        # initializer(self.input.weight)
+
+        # for layer in self.linears:
+        #     initializer(layer.weight)
+
+        # initializer(self.output.weight)
 
         self.dropout = nn.Dropout(0.5)
 
