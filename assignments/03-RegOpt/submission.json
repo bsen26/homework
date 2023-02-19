@@ -2,8 +2,12 @@
     "assignment_name": "RegOpt",
     "contributors": [
         {
-            "name": "Change this to your name",
-            "pennkey": "MyPennKey"
+            "name": "Bhaskar Sen",
+            "pennkey": "bsen26"
+        },
+        {
+            "name": "Vishnu Nair",
+            "pennkey": "nvishnu"
         }
     ],
     "sources": [
