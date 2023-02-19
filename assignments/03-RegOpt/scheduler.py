@@ -7,6 +7,7 @@ class CustomLRScheduler(_LRScheduler):
     """
     Creating a custom LR scheduler module
     """
+
     def __init__(self, optimizer, last_epoch=-1):
         """
         Create a new scheduler.
@@ -16,7 +17,9 @@ class CustomLRScheduler(_LRScheduler):
             last_epoch (int): The index of the last epoch. Default: -1.
         """
         self.initial_lr = 0.1  # factor by which to decrease the learning rate
-        self.lr_decay_interval = 25  # number of epochs after which to decrease the learning rate
+        self.lr_decay_interval = (
+            25  # number of epochs after which to decrease the learning rate
+        )
         self.steps = [80, 120, 160]
         super(CustomLRScheduler, self).__init__(optimizer, last_epoch)
 
@@ -35,4 +38,3 @@ class CustomLRScheduler(_LRScheduler):
         else:
             lr = self.initial_lr * 0.001
         return [lr for _ in self.optimizer.param_groups]
-
