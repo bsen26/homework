@@ -13,14 +13,11 @@ from torchvision.transforms import (
 
 class CONFIG:
     batch_size = 128
-    num_epochs = 25
-    initial_learning_rate = 0.01
+    num_epochs = 20
+    initial_learning_rate = 0.05
     initial_weight_decay = 0.001
 
-    lrs_kwargs = {
-        # You can pass arguments to the learning rate scheduler
-        # constructor here.
-    }
+    lrs_kwargs = {"cycle_length": 1955, "max_lr": 0.05, "base_lr": 0.001}
 
     optimizer_factory: Callable[
         [nn.Module], torch.optim.Optimizer
@@ -28,7 +25,7 @@ class CONFIG:
         model.parameters(),
         lr=CONFIG.initial_learning_rate,
         weight_decay=CONFIG.initial_weight_decay,
-        momentum=0.95,
+        momentum=0.9,
     )
 
     transforms = Compose(

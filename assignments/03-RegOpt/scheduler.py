@@ -11,9 +11,9 @@ class CustomLRScheduler(_LRScheduler):
     def __init__(
         self,
         optimizer,
-        warmup_epochs=5,
-        max_epochs=25,
-        warmup_factor=0.1,
+        max_lr: float = 0.1,
+        cycle_length: int = 1000,
+        base_lr: float = 0.001,
         last_epoch=-1,
         **kwargs
     ):
@@ -22,29 +22,22 @@ class CustomLRScheduler(_LRScheduler):
 
         Args:
             optimizer (torch.optim.Optimizer): The optimizer to use.
+            max_lr (float): The maximum learning rate to use.
+            cycle_length (int): The length of the cycle, in iterations.
+            base_lr (float): The minimum learning rate to use.
             last_epoch (int): The index of the last epoch. Default: -1.
         """
-        self.warmup_epochs = warmup_epochs
-        self.max_epochs = max_epochs
-        self.warmup_factor = warmup_factor
-        super(CustomLRScheduler, self).__init__(optimizer, last_epoch)
+        self.max_lr = max_lr
+        self.cycle_length = cycle_length
+        self.base_lr = base_lr
+        super().__init__(optimizer, last_epoch)
 
     def get_lr(self) -> List[float]:
         """
-        The get lr method is used to compute the new learning rate, in this case we are using cosine annealing
+        Compute the new learning rate using the triangular policy.
         """
-        if self.last_epoch < self.warmup_epochs:
-            return [
-                base_lr * self.warmup_factor * (self.last_epoch + 1)
-                for base_lr in self.base_lrs
-            ]
-        else:
-            factor = 0.5 * (
-                1
-                + math.cos(
-                    (self.last_epoch - self.warmup_epochs)
-                    / (self.max_epochs - self.warmup_epochs)
-                    * math.pi
-                )
-            )
-            return [base_lr * factor for base_lr in self.base_lrs]
+        cycle = math.floor(1 + self.last_epoch / (2 * self.cycle_length))
+        x = abs(self.last_epoch / self.cycle_length - 2 * cycle + 1)
+        lr = self.base_lr + (self.max_lr - self.base_lr) * max(0, (1 - x))
+
+        return [lr for _ in self.optimizer.param_groups]
