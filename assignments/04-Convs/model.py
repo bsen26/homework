@@ -34,7 +34,7 @@ class Model(torch.nn.Module):
         self.bn3 = nn.BatchNorm2d(128)
         self.relu3 = nn.ReLU(inplace=True)
 
-        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        self.maxpool = nn.MaxPool2d(kernel_size=4, stride=4)
         self.fc = nn.Linear(128, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -62,7 +62,7 @@ class Model(torch.nn.Module):
         x = self.relu3(x)
         x = nn.functional.max_pool2d(x, kernel_size=2, stride=2)
 
-        x = self.avgpool(x)
+        x = self.maxpool(x)
         x = x.view(x.size(0), -1)
         x = self.fc(x)
 

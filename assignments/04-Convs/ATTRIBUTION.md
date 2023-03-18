@@ -1,1 +1,2 @@
-Sources - 
+Sources - "https://machinelearningmastery.com/how-to-develop-a-cnn-from-scratch-for-cifar-10-photo-classification/"
+          "https://www.datascienceweekly.org/tutorials/augment-the-cifar10-dataset-using-the-randomhorizontalflip-and-randomcrop-transforms"  
